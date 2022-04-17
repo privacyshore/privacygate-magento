@@ -160,7 +160,7 @@ class Index extends \Magento\Framework\App\Action\Action
     private function getCurlResponse()
     {
         try {
-            $url = "https://api.commerce.coinbase.com/charges/";
+            $url = "https://api.privacygate.io/charges/";
             $this->curl->setHeaders($this->getJsonHeaders());
             $this->curl->post($url, $this->setJsonData());
             $response = $this->curl->getBody();
