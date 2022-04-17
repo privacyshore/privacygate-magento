@@ -16,7 +16,7 @@ Accept Cryptocurrencies on your Magento 2 store with Coinbase Commerce module.
     - DAI
 
 ## Create an Account
-If you don't have a Coinbase Commerce account, <a href="https://commerce.coinbase.com/dashboard/settings">Sign Up</a>.
+If you don't have a Coinbase Commerce account, <a href="https://dash.privacygate.io/register">Sign Up</a>.
 
 ## Manual installation
 
@@ -28,7 +28,7 @@ If you don't have a Coinbase Commerce account, <a href="https://commerce.coinbas
 3. Run the command to download module:
 
   ```bash
-	composer require coinbase/coinbase-commerce-magento
+	composer require privacyshore/privacygate-magento
   ```
 4. Run the following commands to install module:  
 
@@ -41,8 +41,8 @@ If you don't have a Coinbase Commerce account, <a href="https://commerce.coinbas
 
 ## Generate API Credentials
 
-1. Create an API Key <a href="https://commerce.coinbase.com/dashboard/settings"> Coinbase Commerce Dashboard </a> -> API keys -> Create an API key.
-2. Get the API Secret <a href="https://commerce.coinbase.com/dashboard/settings"> Coinbase Commerce Dashboard </a> -> Show Shared Secrets.
+1. Create an API Key <a href="https://dash.privacygate.io/settings"> PrivacyGate Dashboard </a> -> API keys -> Create an API key.
+2. Get the API Secret <a href="https://dash.privacygate.io/settings"> PrivacyGate Dashboard </a> -> Show Shared Secrets.
 
 ## Enable Module in Magento 2 Admin
 
