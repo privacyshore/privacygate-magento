@@ -18,25 +18,15 @@ Accept Cryptocurrencies on your Magento 2 store with PrivacyGate module.
 ## Create an Account
 If you don't have a PrivacyGate account, <a href="https://dash.privacygate.io/register">Sign Up</a>.
 
-## Manual installation
+## Installation
 
-#### For now, download the module and unzip it in the directory app/code of your "Magento Project" root.
-
-### In future, user can download it via composer by following the below steps.
+### Follow the below steps.
 1. Sign in to your Magento server as a Magento file system owner.
 2. Navigate to the root of your Magento installation.
 3. Run the command to download module:
 
   ```bash
 	composer require privacyshore/privacygate-magento
-  ```
-4. Run the following commands to install module:  
-
-  ```bash
-	bin/magento module:enable PrivacyGate_PaymentGateway --clear-static-content
-    bin/magento setup:upgrade
-    bin/magento setup:static-content:deploy
-	bin/magento cache:clean 
   ```
 
 ## Generate API Credentials
