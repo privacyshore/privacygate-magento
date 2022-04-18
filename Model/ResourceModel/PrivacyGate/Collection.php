@@ -1,6 +1,6 @@
 <?php
 
-namespace CoinbaseCommerce\PaymentGateway\Model\ResourceModel\Coinbase;
+namespace PrivacyGate\PaymentGateway\Model\ResourceModel\PrivacyGate;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
@@ -16,6 +16,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init('CoinbaseCommerce\PaymentGateway\Model\Coinbase', 'CoinbaseCommerce\PaymentGateway\Model\ResourceModel\Coinbase');
+        $this->_init('PrivacyGate\PaymentGateway\Model\PrivacyGate', 'PrivacyGate\PaymentGateway\Model\ResourceModel\PrivacyGate');
     }
 }

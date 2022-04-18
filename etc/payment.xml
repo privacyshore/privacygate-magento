@@ -6,7 +6,7 @@
 		</group>
 	</groups>
 	<methods>
-		<method name="coinbasemethod">
+		<method name="privacygatemethod">
 			<allow_multiple_address>1</allow_multiple_address>
 		</method>
 	</methods>

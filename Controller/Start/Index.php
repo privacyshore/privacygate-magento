@@ -1,9 +1,9 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Controller\Start;
+namespace PrivacyGate\PaymentGateway\Controller\Start;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\Exception\LocalizedException;
@@ -66,7 +66,7 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * Start checkout by requesting checkout code and dispatching customer to Coinbase.
+     * Start checkout by requesting checkout code and dispatching customer to PrivacyGate.
      */
     public function execute()
     {
@@ -131,12 +131,12 @@ class Index extends \Magento\Framework\App\Action\Action
 
         $data = json_encode([
             "name" => $this->getStoreName() . " order #" . $order->getId(),
-            "description" => "Purchased through Coinbase Commerce",
+            "description" => "Purchased through PrivacyGate",
             "local_price" => $this->getPricing($order),
             "pricing_type" => "fixed_price",
             "metadata" => $this->getMetaData($order),
-            "redirect_url" => $this->_url->getUrl("coinbasecommerce/webhook/redirect"),
-            "cancel_url" => $this->_url->getUrl("coinbasecommerce/webhook/cancel", ["order_id" => $order->getId()]),
+            "redirect_url" => $this->_url->getUrl("PrivacyGate/webhook/redirect"),
+            "cancel_url" => $this->_url->getUrl("PrivacyGate/webhook/cancel", ["order_id" => $order->getId()]),
         ]);
         return $data;
     }
@@ -146,7 +146,7 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     private function getJsonHeaders()
     {
-        $apiKey = $this->scopeConfig->getValue('payment/coinbasemethod/api_key', ScopeInterface::SCOPE_STORE);
+        $apiKey = $this->scopeConfig->getValue('payment/privacygatemethod/api_key', ScopeInterface::SCOPE_STORE);
         $headers["Content-Type"] = "application/json";
         $headers["X-CC-Api-Key"] = $apiKey;
         $headers["X-CC-Version"] = "2018-03-22";

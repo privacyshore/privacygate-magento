@@ -1,83 +1,83 @@
 <?php
 
-namespace CoinbaseCommerce\PaymentGateway\Model;
+namespace PrivacyGate\PaymentGateway\Model;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Exception\NoSuchEntityException;
-use CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface;
-use CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseSearchResultInterface;
-use CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseSearchResultInterfaceFactory;
-use CoinbaseCommerce\PaymentGateway\Api\CoinbaseRepositoryInterface;
-use CoinbaseCommerce\PaymentGateway\Model\ResourceModel\Coinbase\Collection as CoinbaseCollectionFactory;
-use CoinbaseCommerce\PaymentGateway\Model\ResourceModel\Coinbase\Collection;
+use PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface;
+use PrivacyGate\PaymentGateway\Api\Data\PrivacyGateSearchResultInterface;
+use PrivacyGate\PaymentGateway\Api\Data\PrivacyGateSearchResultInterfaceFactory;
+use PrivacyGate\PaymentGateway\Api\PrivacyGateRepositoryInterface;
+use PrivacyGate\PaymentGateway\Model\ResourceModel\PrivacyGate\Collection as PrivacyGateCollectionFactory;
+use PrivacyGate\PaymentGateway\Model\ResourceModel\PrivacyGate\Collection;
 
-class CoinbaseRepository implements CoinbaseRepositoryInterface
+class PrivacyGateRepository implements PrivacyGateRepositoryInterface
 {
     /**
-     * @var Coinbase
+     * @var PrivacyGate
      */
-    private $coinbaseFactory;
+    private $privacygateFactory;
 
     /**
-     * @var CoinbaseCollectionFactory
+     * @var PrivacyGateCollectionFactory
      */
-    private $coinbaseCollectionFactory;
+    private $privacygateCollectionFactory;
 
     /**
-     * @var CoinbaseSearchResultInterfaceFactory
+     * @var PrivacyGateSearchResultInterfaceFactory
      */
     private $searchResultFactory;
 
     public function __construct(
-        CoinbaseFactory $coinbaseFactory,
-        CoinbaseCollectionFactory $coinbaseCollectionFactory,
-        CoinbaseSearchResultInterfaceFactory $coinbaseSearchResultInterfaceFactory
+        PrivacyGateFactory $privacygateFactory,
+        PrivacyGateCollectionFactory $privacygateCollectionFactory,
+        PrivacyGateSearchResultInterfaceFactory $privacygateSearchResultInterfaceFactory
     ) {
-        $this->coinbaseFactory = $coinbaseFactory;
-        $this->coinbaseCollectionFactory = $coinbaseCollectionFactory;
-        $this->searchResultFactory = $coinbaseSearchResultInterfaceFactory;
+        $this->privacygateFactory = $privacygateFactory;
+        $this->privacygateCollectionFactory = $privacygateCollectionFactory;
+        $this->searchResultFactory = $privacygateSearchResultInterfaceFactory;
     }
 
     public function get($id)
     {
-        $coinbase = $this->coinbaseFactory->create();
-        $coinbase->getResource()->load($coinbase, $id);
-        if (!$coinbase->getId()) {
-            throw new NoSuchEntityException(__('Unable to find coinbase order with ID "%1"', $id));
+        $privacygate = $this->privacygateFactory->create();
+        $privacygate->getResource()->load($privacygate, $id);
+        if (!$privacygate->getId()) {
+            throw new NoSuchEntityException(__('Unable to find privacygate order with ID "%1"', $id));
         }
-        return $coinbase;
+        return $privacygate;
     }
 
     public function getByIncrementId($incrementId)
     {
-        $coinbase = $this->coinbaseFactory->create();
-        $coinbase->getResource()->load($coinbase, $incrementId, 'store_order_id');
-        if (!$coinbase->getId()) {
-            throw new NoSuchEntityException(__('Unable to find coinbase order with store id "%1"', $incrementId));
+        $privacygate = $this->privacygateFactory->create();
+        $privacygate->getResource()->load($privacygate, $incrementId, 'store_order_id');
+        if (!$privacygate->getId()) {
+            throw new NoSuchEntityException(__('Unable to find privacygate order with store id "%1"', $incrementId));
         }
-        return $coinbase;
+        return $privacygate;
     }
 
     public function getByChargeCode($chargeCode)
     {
-        $coinbase = $this->coinbaseFactory->create();
-        $coinbase->getResource()->load($coinbase, $chargeCode, 'coinbase_charge_code');
-        if (!$coinbase->getId()) {
-            throw new NoSuchEntityException(__('Unable to find coinbase order with charge code "%1"', $chargeCode));
+        $privacygate = $this->privacygateFactory->create();
+        $privacygate->getResource()->load($privacygate, $chargeCode, 'privacygate_charge_code');
+        if (!$privacygate->getId()) {
+            throw new NoSuchEntityException(__('Unable to find privacygate order with charge code "%1"', $chargeCode));
         }
-        return $coinbase;
+        return $privacygate;
     }
 
-    public function save(CoinbaseInterface $coinbase)
+    public function save(PrivacyGateInterface $privacygate)
     {
-        $coinbase->getResource()->save($coinbase);
-        return $coinbase;
+        $privacygate->getResource()->save($privacygate);
+        return $privacygate;
     }
 
-    public function delete(CoinbaseInterface $coinbase)
+    public function delete(PrivacyGateInterface $privacygate)
     {
-        $coinbase->getResource()->delete($coinbase);
+        $privacygate->getResource()->delete($privacygate);
     }
 
     public function getList(SearchCriteriaInterface $searchCriteria)

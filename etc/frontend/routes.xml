@@ -7,8 +7,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
-		<route id="coinbasecommerce" frontName="coinbasecommerce">
-            <module name="CoinbaseCommerce_PaymentGateway" />
+		<route id="PrivacyGate" frontName="PrivacyGate">
+            <module name="PrivacyGate_PaymentGateway" />
         </route>
     </router>
 </config>

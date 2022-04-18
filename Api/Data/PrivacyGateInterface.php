@@ -1,17 +1,17 @@
 <?php
 
-namespace CoinbaseCommerce\PaymentGateway\Api\Data;
+namespace PrivacyGate\PaymentGateway\Api\Data;
 
-interface CoinbaseInterface
+interface PrivacyGateInterface
 {
     /**
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
     const ID       = 'id';
     const STORE_ORDER_ID = 'store_order_id';
-    const COINBASE_CHARGE_CODE = 'coinbase_charge_code';
+    const PRIVACYGATE_CHARGE_CODE = 'privacygate_charge_code';
     const TRANSACTION_ID = 'transaction_id';
-    const COINBASE_STATUS = 'coinbase_status';
+    const PRIVACYGATE_STATUS = 'privacygate_status';
     const COINS_RECEIVED = 'coins_received';
     const COINS_EXPECTED = 'coins_expected';
     const RECEIVED_CURRENCY = 'received_currency';
@@ -41,20 +41,20 @@ interface CoinbaseInterface
     public function setStoreOrderId($incrementId);
 
     /**
-     * Gets charge code provided by coinbase.
+     * Gets charge code provided by privacygate.
      *
      * @return string|null Increment ID.
      */
-    public function getCoinbaseChargeCode();
+    public function getPrivacyGateChargeCode();
 
     /**
      * @param string $code
      * @return void
      */
-    public function setCoinbaseChargeCode($code);
+    public function setPrivacyGateChargeCode($code);
 
     /**
-     * Gets the transaction id of coinbase payment.
+     * Gets the transaction id of privacygate payment.
      *
      * @return string|null Transaction Id.
      */
@@ -67,17 +67,17 @@ interface CoinbaseInterface
     public function setTransactionId($id);
 
     /**
-     * Gets status of coinbase payment.
+     * Gets status of privacygate payment.
      *
      * @return string|null Status.
      */
-    public function getCoinbaseStatus();
+    public function getPrivacyGateStatus();
 
     /**
      * @param string $status
      * @return void
      */
-    public function setCoinbaseStatus($status);
+    public function setPrivacyGateStatus($status);
 
     /**
      * Gets the amount of coins received.

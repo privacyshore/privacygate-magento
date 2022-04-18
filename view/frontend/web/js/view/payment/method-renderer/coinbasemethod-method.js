@@ -12,13 +12,13 @@ define(
         return Component.extend({
             redirectAfterPlaceOrder: false,
             defaults: {
-                template: 'CoinbaseCommerce_PaymentGateway/payment/coinbasemethod'
+                template: 'PrivacyGate_PaymentGateway/payment/privacygatemethod'
             },
             getMailingAddress: function () {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
             afterPlaceOrder: function () {
-                var custom_controller_url = url.build('coinbasecommerce/start/index'); //your custom controller url
+                var custom_controller_url = url.build('PrivacyGate/start/index'); //your custom controller url
                 $.post(custom_controller_url, 'json')
                     .done(function (response) {
                         // customerData.invalidate(['cart']);
@@ -34,10 +34,10 @@ define(
 			/** Returns payment currency images link path */
 			getPaymentImage: function () {
 				var custom_image = [
-				require.toUrl('CoinbaseCommerce_PaymentGateway/images/ethereum.svg'),
-				require.toUrl('CoinbaseCommerce_PaymentGateway/images/bitcoin.svg'),
-				require.toUrl('CoinbaseCommerce_PaymentGateway/images/litecoin.svg'),
-				require.toUrl('CoinbaseCommerce_PaymentGateway/images/bitcoin_cash.svg')
+				require.toUrl('PrivacyGate_PaymentGateway/images/ethereum.svg'),
+				require.toUrl('PrivacyGate_PaymentGateway/images/bitcoin.svg'),
+				require.toUrl('PrivacyGate_PaymentGateway/images/litecoin.svg'),
+				require.toUrl('PrivacyGate_PaymentGateway/images/bitcoin_cash.svg'),
 				];
 				return custom_image;
 			}			

@@ -1,28 +1,28 @@
 <?php
 
-namespace CoinbaseCommerce\PaymentGateway\Model;
+namespace PrivacyGate\PaymentGateway\Model;
 
-use CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface;
+use PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 
-class Coinbase extends \Magento\Framework\Model\AbstractModel implements CoinbaseInterface, IdentityInterface
+class PrivacyGate extends \Magento\Framework\Model\AbstractModel implements PrivacyGateInterface, IdentityInterface
 {
     /**
-     * Coinbase Commerce Order
+     * PrivacyGate Order
      */
-    const CACHE_TAG = 'coinbase_order';
+    const CACHE_TAG = 'privacygate_order';
 
     /**
      * @var string
      */
-    protected $_cacheTag = 'coinbase_order';
+    protected $_cacheTag = 'privacygate_order';
 
     /**
      * Prefix of model events names
      *
      * @var string
      */
-    protected $_eventPrefix = 'coinbase_order';
+    protected $_eventPrefix = 'privacygate_order';
 
     /**
      * Initialize resource model
@@ -31,7 +31,7 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
      */
     protected function _construct()
     {
-        $this->_init('CoinbaseCommerce\PaymentGateway\Model\ResourceModel\Coinbase');
+        $this->_init('PrivacyGate\PaymentGateway\Model\ResourceModel\PrivacyGate');
     }
 
     /**
@@ -65,17 +65,17 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
     }
 
     /**
-     * Get Coinbase charge code
+     * Get PrivacyGate charge code
      *
      * @return string
      */
-    public function getCoinbaseChargeCode()
+    public function getPrivacyGateChargeCode()
     {
-        return $this->getData(self::COINBASE_CHARGE_CODE);
+        return $this->getData(self::PRIVACYGATE_CHARGE_CODE);
     }
 
     /**
-     * Gets the transaction id of coinbase payment.
+     * Gets the transaction id of privacygate payment.
      *
      * @return string|null Transaction Id.
      */
@@ -85,13 +85,13 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
     }
 
     /**
-     * Gets status of coinbase payment.
+     * Gets status of privacygate payment.
      *
      * @return string|null Status.
      */
-    public function getCoinbaseStatus()
+    public function getPrivacyGateStatus()
     {
-        return $this->getData(self::COINBASE_STATUS);
+        return $this->getData(self::PRIVACYGATE_STATUS);
     }
 
     /**
@@ -138,7 +138,7 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
      * Set ID
      *
      * @param int $id
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
     public function setId($id)
     {
@@ -147,7 +147,7 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
 
     /**
      * @param string $incrementId
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
     public function setStoreOrderId($incrementId)
     {
@@ -156,16 +156,16 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
 
     /**
      * @param string $charge
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
-    public function setCoinbaseChargeCode($charge)
+    public function setPrivacyGateChargeCode($charge)
     {
-        return $this->setData(self::COINBASE_CHARGE_CODE, $charge);
+        return $this->setData(self::PRIVACYGATE_CHARGE_CODE, $charge);
     }
 
     /**
      * @param string $id
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
     public function setTransactionId($id)
     {
@@ -174,16 +174,16 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
 
     /**
      * @param string $status
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
-    public function setCoinbaseStatus($status)
+    public function setPrivacyGateStatus($status)
     {
-        return $this->setData(self::COINBASE_STATUS, $status);
+        return $this->setData(self::PRIVACYGATE_STATUS, $status);
     }
 
     /**
      * @param float $amount
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
     public function setCoinsReceived($amount)
     {
@@ -192,7 +192,7 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
 
     /**
      * @param float $amount
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
     public function setCoinsExpected($amount)
     {
@@ -201,7 +201,7 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
 
     /**
      * @param string $currency
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
     public function setReceivedCurrency($currency)
     {
@@ -210,7 +210,7 @@ class Coinbase extends \Magento\Framework\Model\AbstractModel implements Coinbas
 
     /**
      * @param float $amount
-     * @return \CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterface
+     * @return \PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterface
      */
     public function setTotalPaid($amount)
     {

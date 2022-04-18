@@ -1,10 +1,10 @@
 <?php
-namespace CoinbaseCommerce\PaymentGateway\Model\ResourceModel;
+namespace PrivacyGate\PaymentGateway\Model\ResourceModel;
 
 /**
- * Coinbase Order mysql resource
+ * PrivacyGate Order mysql resource
  */
-class Coinbase extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class PrivacyGate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
 
     /**
@@ -35,6 +35,6 @@ class Coinbase extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('coinbase_commerce_orders', 'id');
+        $this->_init('privacygate_orders', 'id');
     }
 }

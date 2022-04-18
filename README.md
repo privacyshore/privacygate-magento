@@ -1,5 +1,5 @@
-# Coinbase Commerce Payment Module
-Accept Cryptocurrencies on your Magento 2 store with Coinbase Commerce module.
+# PrivacyGate Payment Module
+Accept Cryptocurrencies on your Magento 2 store with PrivacyGate module.
 
 ## Prerequisite
 - SSL enabled.
@@ -7,7 +7,7 @@ Accept Cryptocurrencies on your Magento 2 store with Coinbase Commerce module.
 ## Accepted Cryptocurrencies
 1. It will accept Cryptocurrencies payment on your store with ease.
 2. Secure payment, goes directly into your own Cryptocurrency wallet.
-3. Following Cryptocurrencies are accepted by the Coinbase Commerce.
+3. Following Cryptocurrencies are accepted by the PrivacyGate.
     - Bitcoin
     - Bitcoin Cash
     - Ethereum
@@ -16,7 +16,7 @@ Accept Cryptocurrencies on your Magento 2 store with Coinbase Commerce module.
     - DAI
 
 ## Create an Account
-If you don't have a Coinbase Commerce account, <a href="https://dash.privacygate.io/register">Sign Up</a>.
+If you don't have a PrivacyGate account, <a href="https://dash.privacygate.io/register">Sign Up</a>.
 
 ## Manual installation
 
@@ -33,7 +33,7 @@ If you don't have a Coinbase Commerce account, <a href="https://dash.privacygate
 4. Run the following commands to install module:  
 
   ```bash
-	bin/magento module:enable CoinbaseCommerce_PaymentGateway --clear-static-content
+	bin/magento module:enable PrivacyGate_PaymentGateway --clear-static-content
     bin/magento setup:upgrade
     bin/magento setup:static-content:deploy
 	bin/magento cache:clean 
@@ -47,21 +47,21 @@ If you don't have a Coinbase Commerce account, <a href="https://dash.privacygate
 ## Enable Module in Magento 2 Admin
 
 1. Configure module in Stores -> Configuration -> Sales -> Payment Methods.
-2. Scroll down to 'Coinbase Commerce'. If you can't find 'Coinbase Commerce', try clearing your Magento cache.
+2. Scroll down to 'PrivacyGate'. If you can't find 'PrivacyGate', try clearing your Magento cache.
 3. Enabled - Select "Yes" to enabled.
 4. Title - it will display on Checkout Page.
 5. New Order Status - Pending (By default).
 6. Sort Order - (Optional) enter integer value, Order with 0 shows at top in the list
 7. API Key - paste the API key. 
 8. API Secret - paste the API secret.
-9. CALLBACK URL - copy the given link to <a href="https://commerce.coinbase.com/dashboard/settings"> Coinbase Commerce Dashboard </a> -> Webhook subscriptions -> Add an endpoint.
+9. CALLBACK URL - copy the given link to <a href="dash.privacygate.io/settings"> PrivacyGate Dashboard </a> -> Webhook subscriptions -> Add an endpoint.
 
 Click "Save Config" on the upper right part of the screen.
 
 ## Step by Step Details:
 - At Checkout Page customer will enter his/her shipping address.
-- Select the payment method "Coinbase Commerce" and hit the "Place Order" button.
-- Coinbase Commerce module will redirect the customer to the Payment Interface. 
+- Select the payment method "PrivacyGate" and hit the "Place Order" button.
+- PrivacyGate module will redirect the customer to the Payment Interface. 
 - Under this payment window customer will have to pay within 15 minutes. 
 - Once paid customer will be redirected to Magento store with a Success or Failure message.
 - Order status will be "On Hold" in the following UNRESOLVED cases: (Multiple, Underpaid or Overpaid paymnet).
@@ -77,7 +77,7 @@ In order to resolve the order status of “On Hold” Order. Merchant/Admin will
 
 
 ## Integrate with other e-commerce platforms
-[Coinbase Commerce Integrations](https://commerce.coinbase.com/integrate)
+[PrivacyGate Integrations](https://privacygate.io/docs/)
 
 ## License
 [Open Source License](LICENSE)

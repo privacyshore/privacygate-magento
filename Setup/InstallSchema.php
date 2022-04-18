@@ -1,9 +1,9 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Setup;
+namespace PrivacyGate\PaymentGateway\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -22,7 +22,7 @@ class InstallSchema implements InstallSchemaInterface
         $installer = $setup;
         $installer->startSetup();
 
-        $tableName = $installer->getTable('coinbase_commerce_orders');
+        $tableName = $installer->getTable('privacygate_orders');
 
         // Check if the table already exists
         if ($installer->getConnection()->isTableExists($tableName) != true) {
@@ -48,11 +48,11 @@ class InstallSchema implements InstallSchemaInterface
                     'Order ID'
                 )
                 ->addColumn(
-                    'coinbase_charge_code',
+                    'privacygate_charge_code',
                     Table::TYPE_TEXT,
                     '10',
                     [ 'unsigned' => true, 'nullable' => false ],
-                    'Coinbase Charge Code'
+                    'PrivacyGate Charge Code'
                 )
                 ->addColumn(
                     'transaction_id',
@@ -62,11 +62,11 @@ class InstallSchema implements InstallSchemaInterface
                     'Transaction Id'
                 )
                 ->addColumn(
-                    'coinbase_status',
+                    'privacygate_status',
                     Table::TYPE_TEXT,
                     '25',
                     [ 'unsigned' => true, 'nullable' => true ],
-                    'Status of coinbase payment'
+                    'Status of privacygate payment'
                 )
                 ->addColumn(
                     'coins_received',
@@ -112,7 +112,7 @@ class InstallSchema implements InstallSchemaInterface
                     'increment_id',
                     \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
                 )
-                ->setComment('Coinbase Commerce orders');
+                ->setComment('PrivacyGate orders');
 
             $installer->getConnection()->createTable($table);
         }

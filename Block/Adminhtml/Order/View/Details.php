@@ -1,28 +1,28 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Block\Adminhtml\Order\View;
+namespace PrivacyGate\PaymentGateway\Block\Adminhtml\Order\View;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use CoinbaseCommerce\PaymentGateway\Api\CoinbaseRepositoryInterface;
+use PrivacyGate\PaymentGateway\Api\PrivacyGateRepositoryInterface;
 
 class Details extends Template
 {
     private $orderRepository;
-    private $coinbaseRepository;
+    private $privacygateRepository;
 
     public function __construct(
         Context $context,
         OrderRepositoryInterface $orderRepository,
-        CoinbaseRepositoryInterface $coinbaseRepository
+        PrivacyGateRepositoryInterface $privacygateRepository
     ) {
         parent::__construct($context);
         $this->orderRepository = $orderRepository;
-        $this->coinbaseRepository = $coinbaseRepository;
+        $this->privacygateRepository = $privacygateRepository;
     }
 
     private function getOrder()
@@ -31,23 +31,23 @@ class Details extends Template
         return $order;
     }
 
-    private function getCoinbaseRecord()
+    private function getPrivacyGateRecord()
     {
-        return $this->coinbaseRepository->getByIncrementId($this->getOrder()->getIncrementId());
+        return $this->privacygateRepository->getByIncrementId($this->getOrder()->getIncrementId());
     }
 
-    public function isPaymentMadeInCoinbase()
+    public function isPaymentMadeInPrivacyGate()
     {
-        return $this->getOrder()->getPayment()->getMethod() == 'coinbasemethod';
+        return $this->getOrder()->getPayment()->getMethod() == 'privacygatemethod';
     }
 
     public function getCoinsDetail()
     {
-        $record = $this->getCoinbaseRecord();
+        $record = $this->getPrivacyGateRecord();
         $data['expectedCoins'] = $record->getCoinsExpected() . ' ' . $record->getReceivedCurrency();
         $data['amount'] = $record->getCoinsReceived() . ' ' . $record->getReceivedCurrency();
-        $data['status'] = $record->getCoinbaseStatus();
-        $data['code'] = $record->getCoinbaseChargeCode();
+        $data['status'] = $record->getPrivacyGateStatus();
+        $data['code'] = $record->getPrivacyGateChargeCode();
         $data['transactionId'] = $record->getTransactionId();
         $data['totalPaid'] = $record->getTotalPaid();
         $data['orderPlacedCurrency'] = $this->getOrder()->getOrderCurrencyCode();

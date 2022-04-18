@@ -1,9 +1,9 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Controller\Webhook;
+namespace PrivacyGate\PaymentGateway\Controller\Webhook;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;

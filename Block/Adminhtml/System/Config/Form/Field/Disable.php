@@ -1,9 +1,9 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Block\Adminhtml\System\Config\Form\Field;
+namespace PrivacyGate\PaymentGateway\Block\Adminhtml\System\Config\Form\Field;
 
 use Magento\Framework\Data\Form\Element\AbstractElement;
 

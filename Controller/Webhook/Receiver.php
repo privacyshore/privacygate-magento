@@ -1,9 +1,9 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Controller\Webhook;
+namespace PrivacyGate\PaymentGateway\Controller\Webhook;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -11,8 +11,8 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Filesystem\Io\File;
-use CoinbaseCommerce\PaymentGateway\Api\CoinbaseRepositoryInterface;
-use CoinbaseCommerce\PaymentGateway\Api\Data\CoinbaseInterfaceFactory;
+use PrivacyGate\PaymentGateway\Api\PrivacyGateRepositoryInterface;
+use PrivacyGate\PaymentGateway\Api\Data\PrivacyGateInterfaceFactory;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Registry;
 use Magento\Sales\Model\Order\Status\HistoryFactory;
@@ -57,9 +57,9 @@ class Receiver extends Action
     private $file;
 
     /**
-     * @var CoinbaseRepositoryInterface
+     * @var PrivacyGateRepositoryInterface
      */
-    private $coinbaseRepository;
+    private $privacygateRepository;
 
     /**
      * @var SearchCriteriaBuilder
@@ -82,9 +82,9 @@ class Receiver extends Action
     private $historyFactory;
 
     /**
-     * @var \CoinbaseCommerce\PaymentGateway\Model\Coinbase
+     * @var \PrivacyGate\PaymentGateway\Model\PrivacyGate
      */
-    private $coinbaseFactory;
+    private $privacygateFactory;
 
     /**
      * @var \Magento\Sales\Model\Service\InvoiceService
@@ -112,8 +112,8 @@ class Receiver extends Action
         JsonFactory $jsonResultFactory,
         LoggerInterface $logger,
         File $file,
-        CoinbaseRepositoryInterface $coinbaseRepository,
-        CoinbaseInterfaceFactory $coinbaseInterfaceFactory,
+        PrivacyGateRepositoryInterface $privacygateRepository,
+        PrivacyGateInterfaceFactory $privacygateInterfaceFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         Registry $registry,
         HistoryFactory $historyFactory,
@@ -129,8 +129,8 @@ class Receiver extends Action
         $this->jsonResultFactory = $jsonResultFactory;
         $this->logger = $logger;
         $this->file = $file;
-        $this->coinbaseRepository = $coinbaseRepository;
-        $this->coinbaseFactory = $coinbaseInterfaceFactory;
+        $this->privacygateRepository = $privacygateRepository;
+        $this->privacygateFactory = $privacygateInterfaceFactory;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->registry = $registry;
         $this->historyFactory = $historyFactory;
@@ -161,11 +161,11 @@ class Receiver extends Action
 
             if ($event['type'] == 'charge:created' || $event['type'] == 'charge:pending') {
                 $this->saveOrderDetails($event);
-            } elseif ($event['coinbaseStatus'] == 'UNRESOLVED') {
+            } elseif ($event['privacygateStatus'] == 'UNRESOLVED') {
                 $this->orderHoldAction($event);
-            } elseif ($event['type'] == 'charge:failed' && $event['coinbaseStatus'] == 'EXPIRED') {
+            } elseif ($event['type'] == 'charge:failed' && $event['privacygateStatus'] == 'EXPIRED') {
                 $this->paymentFailedAction();
-            } elseif ($event['type'] == 'charge:confirmed' && $event['coinbaseStatus'] == 'COMPLETED') {
+            } elseif ($event['type'] == 'charge:confirmed' && $event['privacygateStatus'] == 'COMPLETED') {
                 $this->paymentSuccessAction($event);
             }
 
@@ -174,7 +174,7 @@ class Receiver extends Action
             $result = $this->jsonResultFactory->create();
             return $result;
         } catch (\Exception $e) {
-            $this->logger->critical('Coinbase Webhook Receive Error', ['exception' => $e]);
+            $this->logger->critical('PrivacyGate Webhook Receive Error', ['exception' => $e]);
             throw new LocalizedException(__('Something went wrong while Webhook recieving Api Response'));
         }
     }
@@ -185,7 +185,7 @@ class Receiver extends Action
      */
     private function authenticate($payload)
     {
-        $key = $this->scopeConfig->getValue('payment/coinbasemethod/api_secret');
+        $key = $this->scopeConfig->getValue('payment/privacygatemethod/api_secret');
         $headerSignature = $this->getRequest()->getHeader('X-CC-Webhook-Signature');
         $computedSignature = hash_hmac('sha256', $payload, $key);
         return $headerSignature === $computedSignature;
@@ -211,7 +211,7 @@ class Receiver extends Action
             }
             return $message;
         } catch (\Exception $e) {
-            $this->logger->critical('Coinbase Webhook Receive IPN Error', ['exception' => $e]);
+            $this->logger->critical('PrivacyGate Webhook Receive IPN Error', ['exception' => $e]);
             throw new LocalizedException(__('Something went wrong while adding order status comment'));
         }
     }
@@ -227,8 +227,8 @@ class Receiver extends Action
         $data['chargeCode'] = $input->event->data->code;
         $data['type'] = $input->event->type;
         $data['timeline'] = end($input->event->data->timeline);
-        $this->coinStatus = $data['coinbaseStatus'] = end($input->event->data->timeline)->status;
-        $data['coinbasePayment'] = reset($input->event->data->payments);
+        $this->coinStatus = $data['privacygateStatus'] = end($input->event->data->timeline)->status;
+        $data['privacygatePayment'] = reset($input->event->data->payments);
         $data['eventDataNode'] = $input->event->data;
         return $data;
     }
@@ -240,14 +240,14 @@ class Receiver extends Action
     private function saveOrderDetails($event)
     {
         try {
-            /** @var \CoinbaseCommerce\PaymentGateway\Model\Coinbase $coinbase */
-            $coinbase = $this->coinbaseFactory->create();
-            $coinbase->setCoinbaseChargeCode($event['chargeCode']);
-            $coinbase->setStoreOrderId($event['incrementId']);
-            $this->coinbaseRepository->save($coinbase);
-            $this->logger->info("Coinbase Webhook Order Saved against Charge Code: " . $event['chargeCode']);
+            /** @var \PrivacyGate\PaymentGateway\Model\PrivacyGate $privacygate */
+            $privacygate = $this->privacygateFactory->create();
+            $privacygate->setPrivacyGateChargeCode($event['chargeCode']);
+            $privacygate->setStoreOrderId($event['incrementId']);
+            $this->privacygateRepository->save($privacygate);
+            $this->logger->info("PrivacyGate Webhook Order Saved against Charge Code: " . $event['chargeCode']);
         } catch (\Exception $e) {
-            $this->logger->critical('Coinbase Webhook Recieve Order Save Error', ['exception' => $e]);
+            $this->logger->critical('PrivacyGate Webhook Recieve Order Save Error', ['exception' => $e]);
             throw new LocalizedException(__('Something went wrong while saving Order'));
         }
     }
@@ -309,13 +309,13 @@ class Receiver extends Action
     private function updatePaymentOnSuccess($event, $comment)
     {
         $payment = $this->order->getPayment();
-        $payment->setTransactionId($event['coinbasePayment']->transaction_id);
-        $payment->setCurrencyCode($event['coinbasePayment']->value->local->currency);
+        $payment->setTransactionId($event['privacygatePayment']->transaction_id);
+        $payment->setCurrencyCode($event['privacygatePayment']->value->local->currency);
         $payment->setPreparedMessage($this->_createIpnComment($comment));
         $payment->setShouldCloseParentTransaction(true);
         $payment->setIsTransactionClosed(0);
         $payment->registerCaptureNotification(
-            $event['coinbasePayment']->value->local->amount,
+            $event['privacygatePayment']->value->local->amount,
             true
         );
         return $payment;
@@ -372,7 +372,7 @@ class Receiver extends Action
         if ($this->isPaymentRegistered()) {
             return null;
         }
-        $crypto = $event['coinbasePayment']->value->crypto;
+        $crypto = $event['privacygatePayment']->value->crypto;
         $comment = $crypto->currency . ' ' . $crypto->amount;
         $payment = $this->updatePaymentOnSuccess($event, $comment);
         $this->orderRepository->save($this->order);
@@ -385,15 +385,15 @@ class Receiver extends Action
      */
     private function saveCoinsRecord($event)
     {
-        $network = $event['coinbasePayment']->network;
-        $paymentRecord = $this->coinbaseRepository->getByChargeCode($event['chargeCode']);
-        $paymentRecord->setCoinbaseStatus($event['coinbaseStatus']);
-        $paymentRecord->setCoinsReceived($event['coinbasePayment']->value->crypto->amount);
-        $paymentRecord->setReceivedCurrency($event['coinbasePayment']->value->crypto->currency);
-        $paymentRecord->setTransactionId($event['coinbasePayment']->transaction_id);
+        $network = $event['privacygatePayment']->network;
+        $paymentRecord = $this->privacygateRepository->getByChargeCode($event['chargeCode']);
+        $paymentRecord->setPrivacyGateStatus($event['privacygateStatus']);
+        $paymentRecord->setCoinsReceived($event['privacygatePayment']->value->crypto->amount);
+        $paymentRecord->setReceivedCurrency($event['privacygatePayment']->value->crypto->currency);
+        $paymentRecord->setTransactionId($event['privacygatePayment']->transaction_id);
         $paymentRecord->setCoinsExpected($event['eventDataNode']->pricing->$network->amount);
-        $paymentRecord->setTotalPaid($event['coinbasePayment']->value->local->amount);
-        $this->coinbaseRepository->save($paymentRecord);
+        $paymentRecord->setTotalPaid($event['privacygatePayment']->value->local->amount);
+        $this->privacygateRepository->save($paymentRecord);
     }
 
     /**

@@ -1,19 +1,19 @@
 {
-    "name": "coinbase/coinbase-commerce-magento",
-    "description": "Coinbase Commerce Api integration for Magento 2",
+    "name": "privacygate/privacygate-magento",
+    "description": "PrivacyGate Api integration for Magento 2",
     "type": "magento2-module",
     "version": "1.0.0",
     "license": "OSL-3.0",
     "authors": [
         {
-            "name": "Coinbase"
+            "name": "PrivacyGate"
         }
     ],
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "psr-4": {
-            "CoinbaseCommerce\\PaymentGateway\\": ""
+            "PrivacyGate\\PaymentGateway\\": ""
         },
         "files": [
             "registration.php"

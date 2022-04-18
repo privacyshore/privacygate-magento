@@ -1,9 +1,9 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Controller\Webhook;
+namespace PrivacyGate\PaymentGateway\Controller\Webhook;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -68,7 +68,7 @@ class Redirect extends Action
             $resultPage = $this->resultPageFactory->create();
             return $resultPage;
         } catch (\Exception $e) {
-            $this->logger->critical('Coinbase Webhook Redirect Error', ['exception' => $e]);
+            $this->logger->critical('PrivacyGate Webhook Redirect Error', ['exception' => $e]);
             throw new LocalizedException(__('Something went wrong while redirecting'));
         }
     }

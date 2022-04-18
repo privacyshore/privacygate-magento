@@ -1,9 +1,9 @@
 <?php
 /**
- * Coinbase Commerce
+ * PrivacyGate
  */
 
-namespace CoinbaseCommerce\PaymentGateway\Setup;
+namespace PrivacyGate\PaymentGateway\Setup;
 
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -35,8 +35,8 @@ class InstallData implements InstallDataInterface
         $data_callback_url = [
             'scope' => 'default',
             'scope_id' => 0,
-            'path' => 'payment/coinbasemethod/webhook_url',
-            'value' => $base_url . 'coinbasecommerce/webhook/receiver',
+            'path' => 'payment/privacygatemethod/webhook_url',
+            'value' => $base_url . 'PrivacyGate/webhook/receiver',
         ];
         $setup->getConnection()
             ->insertOnDuplicate($setup->getTable('core_config_data'), $data_callback_url, ['value']);
